@@ -170,13 +170,13 @@ const GOODS_DATA = [
 const FOOD_DATA = [
   {
     name: "天界まんじゅう",
-    price: "¥500",
+    price: "¥350",
     desc: "天界名物<br>4個セット購入でポストカード1枚プレゼント！",
     image: "images/food-manju.webp"
   },
   {
     name: "ニンゲンラムネ",
-    price: "¥500",
+    price: "¥300",
     desc: "悪魔が好む飲み物",
     image: "images/food-manju.webp" // ※画像準備中のため仮でまんじゅう画像を指定
   }
