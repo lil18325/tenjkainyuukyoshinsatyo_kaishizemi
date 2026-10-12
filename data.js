@@ -139,23 +139,45 @@ const FLOW_STEPS = [
 // 3. イベント開催情報（EVENT INFO）
 const EVENT_INFO = {
   date: "2026.10.16（金）- 10.18（日）",
-  time: "10:00 - 18:00（最終入場 17:30）",
+  time: "10:00 - 18:00（※16日のみ12:00〜）",
   location: "8号館2F 8-206教室",
   ticket: "参加無料"
 };
 
-// 4. グッズ・フード情報（GOODS & FOOD）
+// 4. グッズ情報（GOODS）
 const GOODS_DATA = [
   {
+    name: "ポストカード",
+    price: "￥100",
+    desc: "",
+    image: "images/goods-postcard.webp"
+  },
+  {
+    name: "缶バッジ",
+    price: "￥200",
+    desc: "",
+    image: "images/goods-badge.webp"
+  },
+  {
+    name: "フレークシール",
+    price: "￥300",
+    desc: "",
+    image: "images/goods-seal.webp"
+  }
+];
+
+// 5. フード情報（FOOD）
+const FOOD_DATA = [
+  {
     name: "天界まんじゅう",
-    price: "500円 (税込)",
-    desc: "天界で人気",
-    image: "images/goods-manju.webp"
+    price: "¥500",
+    desc: "天界名物<br>4個セット購入でポストカードが1枚ついてきます",
+    image: "images/food-manju.webp"
   },
   {
     name: "ニンゲンラムネ",
-    price: "500円 (税込)",
+    price: "¥500",
     desc: "悪魔が好む飲み物",
-    image: "images/goods-ramune.webp"
+    image: "images/food-manju.webp" // ※画像準備中のため仮でまんじゅう画像を指定
   }
 ];

@@ -164,7 +164,10 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.7rem;
 }
 
-.sec-intro, .sec-chara, .sec-flow, .sec-event, .sec-goods { margin-top: 5rem; }
+/* ================= セクション共通余白 ================= */
+.sec-intro, .sec-chara, .sec-flow, .sec-event, .sec-goods, .sec-food { 
+  margin-top: 8rem;
+}
 
 /* ================= トップページ ================= */
 .top-hero {
@@ -347,16 +350,15 @@ a { color: inherit; text-decoration: none; }
 
 /* ================= 審査手順 GAME FLOW ================= */
 .sec-flow {
-  margin-top: 5rem;
+  margin-top: 8rem;
   background: #d4c3dd;
-  padding: 8.5rem 16px;
+  padding: 4.5rem 16px;
   width: 100vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* ★ 背景は全開に広げつつ、中身の文字・リストは画面中央に綺麗に収める */
 .sec-flow .section-title,
 .sec-flow .flow-list {
   max-width: 600px;
@@ -365,29 +367,34 @@ a { color: inherit; text-decoration: none; }
 }
 
 .sec-flow .section-title {
-  margin-bottom: 6.2rem;
+  margin-bottom: 3.5rem;
 }
 
 .flow-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
+/* ★ ① 数字を横のテキスト群の垂直中央（center）に配置 */
 .flow-step-item {
   display: flex;
-  align-items: flex-start;
-  gap: 28px;
-  padding: 0.5rem;
+  align-items: center; /* 上揃え(flex-start)から中央揃え(center)に変更 */
+  gap: 20px;
+  padding: 0.2rem 0;
 }
 
 .flow-step-num {
   font-family: var(--font-title);
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 800;
   color: var(--c-purple);
   line-height: 1;
+  width: 4rem;
+  min-width: 4rem;
+  font-variant-numeric: tabular-nums;
   flex-shrink: 0;
+  text-align: center;
 }
 
 .flow-step-text h3 {
@@ -400,18 +407,19 @@ a { color: inherit; text-decoration: none; }
 
 .flow-step-text p {
   font-family: var(--font-fashion);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.6;
   color: var(--c-purple);
-  font-weight: 550;
+  font-weight: 700;
+  opacity: 0.95;
 }
 
 /* ================= EVENT INFO ================= */
 .event-card {
   text-align: center;
-  padding: 1rem 0;  /* 囲みを外したので余白をすっきり調整 */
-  border: none;      /* 枠線なし */
-  background: transparent; /* 背景透過 */
+  padding: 1rem 0;
+  border: none;
+  background: transparent;
 }
 
 .event-display {
@@ -421,18 +429,18 @@ a { color: inherit; text-decoration: none; }
   gap: 0.6rem;
 }
 
+/* ★ ② フォント色をすべて var(--c-purple)（#4e3b5d）に統一 */
 .event-date {
   font-family: var(--font-title);
-  font-size: 1.85rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: var(--c-purple);
   letter-spacing: 0.08em;
-  margin-bottom: 18px;
 }
 
 .event-time {
   font-family: var(--font-fashion);
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--c-purple);
   letter-spacing: 0.05em;
@@ -440,65 +448,158 @@ a { color: inherit; text-decoration: none; }
 
 .event-sub {
   font-family: var(--font-fashion);
-  font-size: 1.35rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--c-purple);
-  opacity: 0.85;
   margin-top: 0.4rem;
 }
 
-/* ================= GOODS & FOOD ================= */
-.goods-grid {
+/* ================= 補足テキスト ================= */
+.goods-location-note {
+  font-family: var(--font-fashion);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+/* ================= GOODS セクション（縦3つ・左右交互） ================= */
+.goods-list-vert {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.goods-card {
+.goods-item-row {
   display: flex;
-  gap: 16px;
-  border: 2px solid var(--c-purple);
-  padding: 1rem;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 8px;
+  border-bottom: 1px solid #d4c3dd;
 }
 
-.goods-thumb {
-  width: 90px;
-  height: 90px;
-  border-radius: 6px;
-  object-fit: cover;
+.goods-item-row:last-child {
+  border-bottom: none;
+}
+
+/* 偶数番目（2個目の缶バッジ）は画像を右側に配置 */
+.goods-item-row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* 画像を囲む細線枠（拡大＆角丸化） */
+.goods-img-box {
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
-  border: 1px solid var(--c-lavender);
+  border: 1px solid #4e3b5d;
+  border-radius: 10px;  /* ★ 囲み枠の角を丸く指定 */
+  box-sizing: border-box;
+  overflow: hidden;     /* ★ 角丸からはみ出る部分を綺麗にカット */
 }
 
-.goods-info {
+.goods-thumb-bordered {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;   /* ★ 内側の画像も枠の丸みに合わせて微調整 */
+}
+
+.goods-detail-text {
+  flex: 1;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  padding-top: 4px;
 }
 
-.goods-title {
+.goods-item-name {
   font-family: var(--font-fashion);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--c-purple);
+  letter-spacing: 0.05em;
 }
 
-.goods-price {
+.goods-item-price {
   font-family: var(--font-fashion);
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #8c5383;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  padding-left: 0.2rem;
 }
 
-.goods-desc {
+.goods-item-desc {
   font-family: var(--sans);
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--c-purple);
   opacity: 0.85;
+}
+
+/* ================= FOOD セクション（枠なし2列横並び） ================= */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 18px;
+}
+
+.food-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.food-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  object-fit: cover;
+  border: none;
+  background: #f7f5f0;
+  box-shadow: 0 4px 16px rgba(78, 59, 93, 0.08);
+  margin-bottom: 12px;
+}
+
+.food-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  text-align: left;
+}
+
+.food-title {
+  font-family: var(--font-fashion);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  letter-spacing: 0.03em;
+}
+
+.food-price {
+  font-family: var(--font-fashion);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #8c5383;
+}
+
+.food-desc {
+  font-family: var(--font-fashion);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--c-purple);
+  font-weight: 700;
+  opacity: 0.85;
+  margin-top: 2px;
 }
 
 /* ================= キャラ詳細ページ ================= */

@@ -102,28 +102,50 @@
   }
   renderEventInfo();
    
-   /* ---------- 5. グッズ情報（GOODS & FOOD）生成 ---------- */
-   function buildGoods() {
-     const grid = $("goods-grid");
-     if (!grid) return;
-     grid.innerHTML = "";
-   
-     GOODS_DATA.forEach(g => {
-       const item = document.createElement("div");
-       item.className = "goods-card";
-       item.innerHTML = `
-         <img src="${g.image}" alt="${g.name}" class="goods-thumb" onerror="this.src='images/icon.webp'">
-         <div class="goods-info">
-           <h3 class="goods-title">${g.name}</h3>
-           <span class="goods-price">${g.price}</span>
-           <p class="goods-desc">${g.desc}</p>
-         </div>
-       `;
-       grid.appendChild(item);
-     });
-   }
-   buildGoods();
-   
+/* ---------- 5. グッズ＆フード情報（GOODS & FOOD）生成 ---------- */
+function buildGoodsAndFood() {
+  // GOODS の描画（縦3つジグザグ）
+  const goodsGrid = $("goods-grid");
+  if (goodsGrid && typeof GOODS_DATA !== "undefined") {
+    goodsGrid.innerHTML = "";
+    GOODS_DATA.forEach(g => {
+      const item = document.createElement("div");
+      item.className = "goods-item-row";
+      item.innerHTML = `
+        <div class="goods-img-box">
+          <img src="${g.image}" alt="${g.name}" class="goods-thumb-bordered" onerror="this.src='images/icon.webp'">
+        </div>
+        <div class="goods-detail-text">
+          <h4 class="goods-item-name">【${g.name}】</h4>
+          ${g.price ? `<span class="goods-item-price">${g.price}</span>` : ''}
+          ${g.desc ? `<p class="goods-item-desc">${g.desc}</p>` : ''}
+        </div>
+      `;
+      goodsGrid.appendChild(item);
+    });
+  }
+
+  // FOOD の描画（画像大きめ・2列横並び）
+  const foodGrid = $("food-grid");
+  if (foodGrid && typeof FOOD_DATA !== "undefined") {
+    foodGrid.innerHTML = "";
+    FOOD_DATA.forEach(f => {
+      const item = document.createElement("div");
+      item.className = "food-card";
+      item.innerHTML = `
+        <img src="${f.image}" alt="${f.name}" class="food-thumb" onerror="this.src='images/icon.webp'">
+        <div class="food-info">
+          <h3 class="food-title">${f.name}</h3>
+          ${f.price ? `<span class="food-price">${f.price}</span>` : ''}
+          ${f.desc ? `<p class="food-desc">${f.desc}</p>` : ''}
+        </div>
+      `;
+      foodGrid.appendChild(item);
+    });
+  }
+}
+buildGoodsAndFood();   
+
    /* ---------- 6. キャラ詳細の描画 ---------- */
    function renderDetail(charaId) {
      const idx = CHARAS.findIndex(item => item.id === charaId);
@@ -198,34 +220,34 @@
      }
    }, { passive: true });
    
-   /* ---------- 8. ルーティング ---------- */
-   function route() {
-     const hash = location.hash;
-     const topPage = $("top");
-     const detailPage = $("detail");
-   
-     topPage.hidden = true;
-     detailPage.hidden = true;
-   
-     if (hash.startsWith("#chara-") && hash !== "#chara-sec") {
-       const charaId = hash.replace("#chara-", "");
-       detailPage.hidden = false;
-       renderDetail(charaId);
-       window.scrollTo(0, 0);
-     } else {
-       topPage.hidden = false;
-       const targetIds = ["intro-sec", "chara-sec", "flow-sec", "event-sec", "goods-sec"];
-       const targetId = hash.replace("#", "");
-       if (targetIds.includes(targetId)) {
-         const target = $(targetId);
-         if (target) {
-           setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 50);
-         }
-       } else {
-         window.scrollTo(0, 0);
-       }
-     }
-   }
+/* ---------- 8. ルーティング ---------- */
+function route() {
+  const hash = location.hash;
+  const topPage = $("top");
+  const detailPage = $("detail");
+
+  topPage.hidden = true;
+  detailPage.hidden = true;
+
+  if (hash.startsWith("#chara-") && hash !== "#chara-sec") {
+    const charaId = hash.replace("#chara-", "");
+    detailPage.hidden = false;
+    renderDetail(charaId);
+    window.scrollTo(0, 0);
+  } else {
+    topPage.hidden = false;
+    const targetIds = ["intro-sec", "chara-sec", "flow-sec", "event-sec", "goods-sec", "food-sec"];
+    const targetId = hash.replace("#", "");
+    if (targetIds.includes(targetId)) {
+      const target = $(targetId);
+      if (target) {
+        setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 50);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+}
    
    addEventListener("hashchange", route);
    route();
