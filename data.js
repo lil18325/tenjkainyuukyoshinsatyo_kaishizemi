@@ -149,19 +149,19 @@ const GOODS_DATA = [
   {
     name: "ポストカード",
     price: "￥100",
-    desc: "",
+    desc: "ポストカードは絵柄2種類",
     image: "images/goods-postcard.webp"
   },
   {
     name: "缶バッジ",
     price: "￥200",
-    desc: "",
+    desc: "缶バッジは「天界バッジ」実際に審査で使う天界バッジの再現をしてます。<br> 天界の一員になれる品物です！ ",
     image: "images/goods-badge.webp"
   },
   {
-    name: "フレークシール",
+    name: "フレークステッカー",
     price: "￥300",
-    desc: "",
+    desc: "フレークステッカーは「全8キャラとシンボルマーク封入」 10枚入りです。",
     image: "images/goods-seal.webp"
   }
 ];
@@ -169,15 +169,21 @@ const GOODS_DATA = [
 // 5. フード情報（FOOD）
 const FOOD_DATA = [
   {
-    name: "天界まんじゅう",
+    name: "天界まんじゅう（単品）",
     price: "¥350",
-    desc: "天界名物<br>4個セット購入でポストカード1枚プレゼント！",
+    desc: "天界名物<br>単品は黒糖と白があり、<br>ノベルティがランダムで一つ付いてきます。",
+    image: "images/food-manju.webp"
+  },
+  {
+    name: "天界まんじゅう（4個セット）",
+    price: "1200円 (税込)",
+    desc: "4個入りはそれぞれ二つずつ入ってます。<br>ノベルティは全種入ります。",
     image: "images/food-manju.webp"
   },
   {
     name: "ニンゲンラムネ",
     price: "¥300",
-    desc: "悪魔が好む飲み物",
+    desc: "悪魔が好きな人間界のラムネ<br>ラムネはキャラクタータグがついてきます。",
     image: "images/food-manju.webp" // ※画像準備中のため仮でまんじゅう画像を指定
   }
 ];

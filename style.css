@@ -261,11 +261,29 @@ a { color: inherit; text-decoration: none; }
 }
 .intro-text {
   font-family: var(--font-fashion);
-  line-height: 2.1;
-  font-size: 1rem;
+  color: var(--c-purple);
+  text-align: center; /* 中央揃えで世界観を演出 */
+  padding-top: 30px;
+}
+
+/* 一文一文の間隔を広めに確保 */
+.intro-line {
+  font-size: 0.95rem;
   font-weight: 600;
-  text-align: justify;
-  letter-spacing: 0.04em;
+  line-height: 1.9;
+  margin-bottom: 1.2rem; /* 文ごとの間隔 */
+}
+
+/* 強調文字（あなたの選択が未来を変える。） */
+.intro-catch {
+  font-size: 1.35rem;     /* 文字を大きく指定 */
+  font-weight: 900;
+  -webkit-text-stroke: 0.5px var(--c-purple);
+  line-height: 1.6;
+  margin-top: 2.8rem;     /* 上の文との間隔をさらに大きく */
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.08em;
+  color: var(--c-purple);
 }
 
 .diamond-decor {
@@ -466,15 +484,10 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.9;
 }
 
-/* ================= GOODS セクション（縦3つ・左右交互） ================= */
-.goods-list-vert {
-  display: flex;
-  flex-direction: column;
-}
-
+/* ================= GOODSセクション（枠なし・透過画像表示） ================= */
 .goods-item-row {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start; /* 画像とテキストの上端を揃える */
   justify-content: space-between;
   gap: 20px;
   padding: 24px 8px;
@@ -490,23 +503,27 @@ a { color: inherit; text-decoration: none; }
   flex-direction: row-reverse;
 }
 
-/* 画像を囲む細線枠（拡大＆角丸化） */
+/* ★ 画像配置エリア：枠線・背景を完全に透過 */
 .goods-img-box {
   width: 150px;
-  height: 150px;
+  height: 120px;
   flex-shrink: 0;
-  border: 1px solid #4e3b5d;
-  border-radius: 10px;  /* ★ 囲み枠の角を丸く指定 */
+  border: 1px solid #4e3b5d; /* ★ 細い枠線 */
+  border-radius: 10px;       /* ★ 角丸 */
+  background: #ffffff;   /* ★ 背景は透過（※白背景にしたい場合は #ffffff に変更できます） */
+  padding: 1px;              /* ★ 枠線と画像がくっつかないよう内側に内余白を設定 */
   box-sizing: border-box;
-  overflow: hidden;     /* ★ 角丸からはみ出る部分を綺麗にカット */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* ★ 透過画像：枠内にきれいに収まるよう配置 */
 .goods-thumb-bordered {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 125%;
+  height: 125%;
+  object-fit: contain;
   display: block;
-  border-radius: 6px;   /* ★ 内側の画像も枠の丸みに合わせて微調整 */
 }
 
 .goods-detail-text {
@@ -535,8 +552,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .goods-item-desc {
-  font-family: var(--sans);
-  font-size: 0.85rem;
+  font-family: var(--font-fashion);
+  font-size: 0.8rem;
   line-height: 1.5;
   color: var(--c-purple);
   opacity: 0.85;
@@ -594,7 +611,7 @@ a { color: inherit; text-decoration: none; }
 
 .food-desc {
   font-family: var(--font-fashion);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   color: var(--c-purple);
   font-weight: 700;
