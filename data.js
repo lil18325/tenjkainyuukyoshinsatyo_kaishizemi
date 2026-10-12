@@ -171,7 +171,7 @@ const FOOD_DATA = [
   {
     name: "天界まんじゅう",
     price: "¥500",
-    desc: "天界名物<br>4個セット購入でポストカードが1枚ついてきます",
+    desc: "天界名物<br>4個セット購入でポストカード1枚プレゼント！",
     image: "images/food-manju.webp"
   },
   {
