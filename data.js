@@ -172,18 +172,18 @@ const FOOD_DATA = [
     name: "天界まんじゅう（単品）",
     price: "¥350",
     desc: "天界名物<br>単品は黒糖と白があります。<br>ノベルティがランダムで一つ付いてきます。",
-    image: "images/food-manju.webp"
+    image: "images/food-manju1.webp"
   },
   {
     name: "天界まんじゅう（4個セット）",
     price: "1200円 (税込)",
     desc: "4個入りはそれぞれ二つずつ入ってます。<br>ノベルティは全種入ります。",
-    image: "images/food-manju.webp" // ※まんじゅうセット画像に変える
+    image: "images/food-manju2.webp" // ※まんじゅうセット画像に変える
   },
   {
     name: "ニンゲンラムネ",
     price: "¥300",
     desc: "悪魔が好きな人間界のラムネ<br>ラムネはキャラクタータグがついてきます。",
-    image: "images/icon.webp" // ※ラムネ画像に変える
+    image: "images/food-ramune.webp" // ※ラムネ画像に変える
   }
 ];
