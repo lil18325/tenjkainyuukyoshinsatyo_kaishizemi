@@ -32,7 +32,7 @@ const CHARAS = [
     thumbX: -165,
     thumbY: -63,
     quote: "「諸君！期待しているぞ！」",
-    desc: "天界入境審査庁の幹部天使。<br>新人審査官教育担当。信心深く、優秀な天使。とても目立つ人"
+    desc: "天界入境審査庁の幹部天使。<br>新人審査官教育担当。信心深く、優秀な天使。<br>とても目立つ人。"
   },
   {
     id: "nicolo",
@@ -139,7 +139,7 @@ const FLOW_STEPS = [
 // 3. イベント開催情報（EVENT INFO）
 const EVENT_INFO = {
   date: "2026.10.16（金）- 10.18（日）",
-  time: "10:00 - 18:00（※16日のみ12:00〜）",
+  time: "10:00 - 18:00（16日のみ12:00〜）",
   location: "8号館2F 8-206教室",
   ticket: "参加無料"
 };
@@ -171,19 +171,19 @@ const FOOD_DATA = [
   {
     name: "天界まんじゅう（単品）",
     price: "¥350",
-    desc: "天界名物<br>単品は黒糖と白があり、<br>ノベルティがランダムで一つ付いてきます。",
+    desc: "天界名物<br>単品は黒糖と白があります。<br>ノベルティがランダムで一つ付いてきます。",
     image: "images/food-manju.webp"
   },
   {
     name: "天界まんじゅう（4個セット）",
     price: "1200円 (税込)",
     desc: "4個入りはそれぞれ二つずつ入ってます。<br>ノベルティは全種入ります。",
-    image: "images/food-manju.webp"
+    image: "images/food-manju.webp" // ※まんじゅうセット画像に変える
   },
   {
     name: "ニンゲンラムネ",
     price: "¥300",
     desc: "悪魔が好きな人間界のラムネ<br>ラムネはキャラクタータグがついてきます。",
-    image: "images/food-manju.webp" // ※画像準備中のため仮でまんじゅう画像を指定
+    image: "images/icon.webp" // ※ラムネ画像に変える
   }
 ];

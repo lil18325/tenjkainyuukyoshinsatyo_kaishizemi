@@ -557,7 +557,7 @@ a { color: inherit; text-decoration: none; }
 .goods-item-desc {
   font-family: var(--font-fashion);
   font-size: 0.8rem;
-  line-height: 1.5;
+  font-weight: 700;
   color: var(--c-purple);
   opacity: 0.85;
 }
