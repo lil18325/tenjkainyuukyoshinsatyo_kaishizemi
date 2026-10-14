@@ -222,12 +222,21 @@ window.addEventListener("DOMContentLoaded", () => {
   const prevBtn = $("modal-prev-btn");
   const nextBtn = $("modal-next-btn");
   const modalContent = document.querySelector(".modal-content");
+  const modal = $("image-modal");
 
   if (closeBtn) closeBtn.onclick = closeImageModal;
   if (overlay) overlay.onclick = closeImageModal;
   if (prevBtn) prevBtn.onclick = () => stepImageModal(-1);
   if (nextBtn) nextBtn.onclick = () => stepImageModal(1);
 
+  /* ★ 追加: モーダル開閉中の背景ページへのスクロール（画面の揺れ・移動）を完全無効化 */
+  if (modal) {
+    modal.addEventListener("touchmove", e => {
+      e.preventDefault();
+    }, { passive: false });
+  }
+
+  /* ★ スマホ画面での左右指スライド（スワイプ）操作 */
   if (modalContent) {
     modalContent.addEventListener("touchstart", e => {
       modalTouchStartX = e.touches[0].clientX;
@@ -238,6 +247,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const dx = e.changedTouches[0].clientX - modalTouchStartX;
       const dy = e.changedTouches[0].clientY - modalTouchStartY;
 
+      // 左右に40px以上スライドした場合に切り替え実行
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
         stepImageModal(dx < 0 ? 1 : -1);
       }
