@@ -67,52 +67,61 @@
    buildCharaGrid("chara-grid");
    buildCharaGrid("others-grid");
    
-   /* ---------- 3. 審査手順（FLOW）生成 ---------- */
-   function buildFlow() {
-     const flowList = $("flow-list");
-     if (!flowList) return;
-     flowList.innerHTML = "";
-   
-     FLOW_STEPS.forEach(s => {
-       const item = document.createElement("div");
-       item.className = "flow-step-item";
-       item.innerHTML = `
-         <div class="flow-step-num">${s.num}</div>
-         <div class="flow-step-text">
-           <h3>${s.title}</h3>
-           <p>${s.desc}</p>
-         </div>
-       `;
-       flowList.appendChild(item);
-     });
-   }
-   buildFlow();
-   
-   /* ---------- 4. イベント情報（EVENT INFO）生成 ---------- */
-   function renderEventInfo() {
-    const card = $("event-card");
-    if (!card) return;
-    card.innerHTML = `
-      <div class="event-display">
-        <div class="event-date">${EVENT_INFO.date}</div>
-        <div class="event-time">${EVENT_INFO.time}</div>
-        <div class="event-sub">${EVENT_INFO.location} &nbsp;|&nbsp; ${EVENT_INFO.ticket}</div>
+/* ---------- 3. 審査手順（FLOW）生成 ---------- */
+function buildFlow() {
+  const flowList = $("flow-list");
+  if (!flowList) return;
+  flowList.innerHTML = "";
+
+  FLOW_STEPS.forEach(s => {
+    const item = document.createElement("div");
+    item.className = "flow-step-item";
+    item.innerHTML = `
+      <div class="flow-step-num">${s.num}</div>
+      <div class="flow-step-text">
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+      </div>
+      <!-- ★ 右側に置く画像要素を追加 -->
+      <div class="flow-step-img-box">
+        <img src="${s.image}" alt="${s.title}" class="flow-step-img" onerror="this.src='images/icon.webp'">
       </div>
     `;
-  }
-  renderEventInfo();
-   
+    flowList.appendChild(item);
+  });
+}
+buildFlow();
+
+/* ---------- 4. イベント情報（EVENT INFO）生成 ---------- */
+function renderEventInfo() {
+  const card = $("event-card");
+  if (!card) return;
+  card.innerHTML = `
+    <div class="event-display">
+      <div class="event-date">${EVENT_INFO.date}</div>
+      <div class="event-time">${EVENT_INFO.time}</div>
+      <div class="event-sub">${EVENT_INFO.location} &nbsp;|&nbsp; ${EVENT_INFO.ticket}</div>
+      ${EVENT_INFO.image ? `
+        <div class="event-img-box">
+          <img src="${EVENT_INFO.image}" alt="アクセス情報" class="event-access-img" onerror="this.src='images/icon.webp'">
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+renderEventInfo();
+
 /* ---------- 5. グッズ＆フード情報（GOODS & FOOD）生成 ---------- */
 function buildGoodsAndFood() {
-  // GOODS の描画（縦3つジグザグ）
+  // GOODS の描画
   const goodsGrid = $("goods-grid");
   if (goodsGrid && typeof GOODS_DATA !== "undefined") {
     goodsGrid.innerHTML = "";
-    GOODS_DATA.forEach(g => {
+    GOODS_DATA.forEach((g, idx) => {
       const item = document.createElement("div");
       item.className = "goods-item-row";
       item.innerHTML = `
-        <div class="goods-img-box">
+        <div class="goods-img-box" onclick="openImageModal('goods', ${idx})">
           <img src="${g.image}" alt="${g.name}" class="goods-thumb-bordered" onerror="this.src='images/icon.webp'">
         </div>
         <div class="goods-detail-text">
@@ -125,15 +134,15 @@ function buildGoodsAndFood() {
     });
   }
 
-  // FOOD の描画（画像大きめ・2列横並び）
+  // FOOD の描画
   const foodGrid = $("food-grid");
   if (foodGrid && typeof FOOD_DATA !== "undefined") {
     foodGrid.innerHTML = "";
-    FOOD_DATA.forEach(f => {
+    FOOD_DATA.forEach((f, idx) => {
       const item = document.createElement("div");
       item.className = "food-card";
       item.innerHTML = `
-        <img src="${f.image}" alt="${f.name}" class="food-thumb" onerror="this.src='images/icon.webp'">
+        <img src="${f.image}" alt="${f.name}" class="food-thumb" onclick="openImageModal('food', ${idx})" onerror="this.src='images/icon.webp'">
         <div class="food-info">
           <h3 class="food-title">${f.name}</h3>
           ${f.price ? `<span class="food-price">${f.price}</span>` : ''}
@@ -144,7 +153,97 @@ function buildGoodsAndFood() {
     });
   }
 }
-buildGoodsAndFood();   
+buildGoodsAndFood();
+
+/* ---------- 画像拡大モーダル制御 ---------- */
+let currentModalCategory = "goods";
+let currentModalIndex = 0;
+
+function openImageModal(category, index) {
+  currentModalCategory = category;
+  currentModalIndex = index;
+  updateModalContent();
+  const modal = $("image-modal");
+  if (modal) {
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeImageModal() {
+  const modal = $("image-modal");
+  if (modal) {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  }
+}
+
+function stepImageModal(dir) {
+  const list = currentModalCategory === "goods" ? GOODS_DATA : FOOD_DATA;
+  currentModalIndex = (currentModalIndex + dir + list.length) % list.length;
+  updateModalContent();
+}
+
+function updateModalContent() {
+  const list = currentModalCategory === "goods" ? GOODS_DATA : FOOD_DATA;
+  const item = list[currentModalIndex];
+  if (!item) return;
+
+  const modalImg = $("modal-img");
+  const modalCaption = $("modal-caption");
+
+  if (modalImg) {
+    modalImg.src = item.image;
+    modalImg.alt = item.name;
+
+    if (currentModalCategory === "food") {
+      modalImg.classList.add("is-food");
+      modalImg.classList.remove("is-goods");
+    } else {
+      modalImg.classList.remove("is-food");
+      modalImg.classList.add("is-goods");
+    }
+  }
+
+  if (modalCaption) {
+    modalCaption.innerHTML = `
+      <span class="modal-title">【${item.name}】</span>
+      ${item.price ? `<span class="modal-price">${item.price}</span>` : ''}
+    `;
+  }
+}
+
+let modalTouchStartX = 0;
+let modalTouchStartY = 0;
+
+window.addEventListener("DOMContentLoaded", () => {
+  const closeBtn = $("modal-close-btn");
+  const overlay = $("modal-overlay");
+  const prevBtn = $("modal-prev-btn");
+  const nextBtn = $("modal-next-btn");
+  const modalContent = document.querySelector(".modal-content");
+
+  if (closeBtn) closeBtn.onclick = closeImageModal;
+  if (overlay) overlay.onclick = closeImageModal;
+  if (prevBtn) prevBtn.onclick = () => stepImageModal(-1);
+  if (nextBtn) nextBtn.onclick = () => stepImageModal(1);
+
+  if (modalContent) {
+    modalContent.addEventListener("touchstart", e => {
+      modalTouchStartX = e.touches[0].clientX;
+      modalTouchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    modalContent.addEventListener("touchend", e => {
+      const dx = e.changedTouches[0].clientX - modalTouchStartX;
+      const dy = e.changedTouches[0].clientY - modalTouchStartY;
+
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        stepImageModal(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  }
+});
 
    /* ---------- 6. キャラ詳細の描画 ---------- */
    function renderDetail(charaId) {
@@ -185,7 +284,7 @@ buildGoodsAndFood();
          mainImg.onload = () => mainImg.classList.add("float-anim");
        }
      }
-   // ③ キャラ情報
+   // キャラ情報
   $("chara-info").innerHTML = `
   <h3 class="detail-chara-name">${c.name}</h3>
   <span class="detail-chara-kana">${c.kana || ''}</span>

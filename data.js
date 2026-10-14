@@ -126,14 +126,14 @@ const CHARAS = [
   }
 ];
 
-// 2. 審査手順（FLOW）
+// 2. 審査手順（GAME FLOW）
 const FLOW_STEPS = [
-  { num: "01", title: "難易度選択", desc: "難易度を選択し、札を小窓に入れる。" },
-  { num: "02", title: "書類確認", desc: "ファイルから入境希望者リスト、ロゴ・マーク一覧を取り出す。" },
-  { num: "03", title: "審査開始", desc: "合図があったら審査開始！審査するポイントはチェックリストを参考にする。" },
-  { num: "04", title: "判決の選択", desc: "入境を許可する場合は「入境許可」スタンプを、拒否する場合は「入境拒否」スタンプを審判書に押す。" },
-  { num: "05", title: "書類返却", desc: "合図がなったら、書類を優しく小窓に戻す。" },
-  { num: "06", title: "結果確認", desc: "5人分審査し終えたら、書類をファイルに戻し、審判書を持って退出する。" }
+  { num: "01", title: "難易度選択", desc: "難易度を選択し、札を小窓に入れる。", image: "images/sousa-1.webp" },
+  { num: "02", title: "書類確認", desc: "ファイルから入境希望者リスト、ロゴ・マーク一覧を取り出す。", image: "images/sousa-2.webp" },
+  { num: "03", title: "審査開始", desc: "合図があったら審査開始！審査するポイントはチェックリストを参考にする。", image: "images/sousa-3.webp" },
+  { num: "04", title: "判決の選択", desc: "入境を許可する場合は「入境許可」スタンプを、拒否する場合は「入境拒否」スタンプを審判書に押す。", image: "images/sousa-4.webp" },
+  { num: "05", title: "書類返却", desc: "合図がなったら、書類を優しく小窓に戻す。", image: "images/sousa-5.webp" },
+  { num: "06", title: "結果確認", desc: "5人分審査し終えたら、書類をファイルに戻し、審判書を持って退出する。", image: "images/sousa-6.webp" }
 ];
 
 // 3. イベント開催情報（EVENT INFO）
@@ -141,26 +141,27 @@ const EVENT_INFO = {
   date: "2026.10.16（金）- 10.18（日）",
   time: "10:00 - 18:00（16日のみ12:00〜）",
   location: "8号館2F 8-206教室",
-  ticket: "参加無料"
+  ticket: "参加無料",
+  image: "images/access.webp"
 };
 
 // 4. グッズ情報（GOODS）
 const GOODS_DATA = [
   {
     name: "ポストカード",
-    price: "￥100",
+    price: "￥100 (税込)",
     desc: "ポストカードは絵柄2種類",
     image: "images/goods-postcard.webp"
   },
   {
     name: "缶バッジ",
-    price: "￥200",
+    price: "￥200 (税込)",
     desc: "缶バッジは「天界バッジ」実際に審査で使う天界バッジの再現をしてます。<br> 天界の一員になれる品物です！ ",
     image: "images/goods-badge.webp"
   },
   {
     name: "フレークステッカー",
-    price: "￥300",
+    price: "￥300 (税込)",
     desc: "フレークステッカーは「全8キャラとシンボルマーク封入」 10枚入りです。",
     image: "images/goods-seal.webp"
   }
@@ -170,20 +171,20 @@ const GOODS_DATA = [
 const FOOD_DATA = [
   {
     name: "天界まんじゅう（単品）",
-    price: "¥350",
+    price: "¥350 (税込)",
     desc: "天界名物<br>単品は黒糖と白があります。<br>ノベルティがランダムで一つ付いてきます。",
     image: "images/food-manju1.webp"
   },
   {
     name: "天界まんじゅう（4個セット）",
-    price: "1200円 (税込)",
+    price: "¥1200円 (税込)",
     desc: "4個入りはそれぞれ二つずつ入ってます。<br>ノベルティは全種入ります。",
-    image: "images/food-manju2.webp" // ※まんじゅうセット画像に変える
+    image: "images/food-manju2.webp"
   },
   {
     name: "ニンゲンラムネ",
-    price: "¥300",
+    price: "¥300 (税込)",
     desc: "悪魔が好きな人間界のラムネ<br>ラムネはキャラクタータグがついてきます。",
-    image: "images/food-ramune.webp" // ※ラムネ画像に変える
+    image: "images/food-ramune.webp"
   }
 ];

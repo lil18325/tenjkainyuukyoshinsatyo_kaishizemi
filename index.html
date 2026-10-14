@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>天界入境審査庁</title>
+<title>天界入境審査庁-Produced by カイシゼミ14期生- 公式サイト</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Google Fonts -->
@@ -130,20 +130,20 @@
       <div class="event-card" id="event-card"></div>
     </section>
 
-<!-- GOODS セクション -->
-<section class="sec-goods" id="goods-sec">
-  <h2 class="section-title">GOODS</h2>
-  <p class="goods-location-note">8-206教室で販売 (参加者のみ購入可能)</p>
-  <div class="goods-list-vert" id="goods-grid"></div>
-</section>
+    <!-- GOODS セクション -->
+    <section class="sec-goods" id="goods-sec">
+      <h2 class="section-title">GOODS</h2>
+      <p class="goods-location-note">8-206教室で販売 (参加者のみ購入可能)</p>
+      <div class="goods-list-vert" id="goods-grid"></div>
+    </section>
 
-<!-- FOOD セクション -->
-<section class="sec-food" id="food-sec">
-  <h2 class="section-title">FOOD</h2>
-  <p class="goods-location-note">芝生広場前で販売</p>
-  <div class="food-grid" id="food-grid"></div>
-</section>
-</div>
+    <!-- FOOD セクション -->
+    <section class="sec-food" id="food-sec">
+      <h2 class="section-title">FOOD</h2>
+      <p class="goods-location-note">芝生広場前で販売</p>
+      <div class="food-grid" id="food-grid"></div>
+    </section>
+  </div>
 </main>
 
 <!-- ================= キャラ詳細ページ ================= -->
@@ -180,13 +180,31 @@
 
 <!-- フッター -->
 <footer class="site-footer">
-  <p class="credit">制作 カイシゼミ14期生</p>
+  <p class="credit">Produced by カイシゼミ14期生</p>
   <div class="sns-links">
     <a href="https://x.com/kaishizemi14" class="twitter-btn" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
       <img src="images/X-icon.webp" alt="Twitter" onerror="this.parentElement.innerHTML='X';">
     </a>
   </div>
 </footer>
+
+<!-- ★ 修正: 画像拡大モーダル -->
+<div class="image-modal" id="image-modal" hidden aria-hidden="true">
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close-btn" id="modal-close-btn" aria-label="閉じる">✕</button>
+
+    <!-- ★ 白い四角（画像と左右矢印を包む枠） -->
+    <div class="modal-img-box">
+      <button class="modal-nav-btn prev" id="modal-prev-btn" aria-label="前の画像">‹</button>
+      <img src="" alt="" id="modal-img" class="modal-img">
+      <button class="modal-nav-btn next" id="modal-next-btn" aria-label="次の画像">›</button>
+    </div>
+
+    <!-- キャプション（商品名・価格） -->
+    <div class="modal-caption" id="modal-caption"></div>
+  </div>
+</div>
 
 <script src="data.js"></script>
 <script src="main.js"></script>
