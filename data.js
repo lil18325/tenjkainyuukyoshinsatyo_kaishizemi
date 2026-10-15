@@ -139,7 +139,7 @@ const FLOW_STEPS = [
 // 3. イベント開催情報（EVENT INFO）
 const EVENT_INFO = {
   date: "2026.10.16（金）- 10.18（日）",
-  time: "10:00 - 18:00（16日のみ12:00〜）",
+  time: "11:00 - 18:00<br>（16日のみ12:00〜17:30）",
   location: "8号館2F 8-206教室",
   ticket: "参加無料",
   image: "images/access.webp"
