@@ -89,7 +89,6 @@ a { color: inherit; text-decoration: none; }
 .header-logo, .menu-btn, .header-nav { pointer-events: auto; }
 .header-logo img { height: 68px; width: auto; object-fit: contain; }
 
-/* スマホ表示ではPC用ナビゲーションを非表示 */
 .header-nav { display: none; }
 
 .menu-btn {
@@ -445,11 +444,11 @@ a { color: inherit; text-decoration: none; }
 
 .event-time {
   font-family: var(--font-fashion);
-  font-size: 1rem;             /* 2行表示に合わせて少し読みやすいサイズに */
+  font-size: 1rem;
   font-weight: 700;
   color: var(--c-purple);
   letter-spacing: 0.05em;
-  line-height: 1.7;            /* ★ 追加: 2行になった時の行間をきれいに開ける */
+  line-height: 1.7;
   margin: 0.2rem 0;
 }
 
@@ -576,6 +575,30 @@ a { color: inherit; text-decoration: none; }
   padding: 0;
 }
 
+.food-thumb-wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* 「ノベルティあり」の横長丸バッジ */
+.food-badge-novelty {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 2;
+  background: var(--c-purple);
+  color: #ffffff;
+  font-family: var(--font-fashion);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .food-thumb {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -583,9 +606,11 @@ a { color: inherit; text-decoration: none; }
   object-fit: contain;
   border: 1px solid #4e3b5d;
   background: #ffffff;
-  padding: 14px;
+  padding: 10px 18px 30px;
   box-shadow: none;
-  margin-bottom: 12px;
+  margin-bottom: 0 !important;
+  cursor: pointer;
+  display: block;
 }
 
 .food-info {
@@ -818,11 +843,8 @@ a { color: inherit; text-decoration: none; }
 .twitter-btn { display: inline-block; width: 36px; height: 36px; }
 .twitter-btn img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ============================================================
-   PC用 レスポンシブ表示設定（一元化） (@media min-width: 768px)
-   ============================================================ */
+/* ================= PC用 レスポンシブ表示設定 ================= */
 @media (min-width: 768px) {
-  /* --- 1. PC固定ヘッダー & ロゴ拡大 --- */
   .fixed-header {
     height: 88px;
     padding: 0 40px;
@@ -871,7 +893,6 @@ a { color: inherit; text-decoration: none; }
     left: 0;
   }
 
-  /* --- 2. トップ --- */
   .top-hero {
     position: relative;
     width: 100%;
@@ -918,7 +939,6 @@ a { color: inherit; text-decoration: none; }
     transform: translate(-50%, 0);
   }
 
-  /* --- 3. キャラ詳細ページ --- */
   .detail-page { padding-top: 110px; }
 
   .stage {
@@ -957,8 +977,8 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   padding: 16px;
-  touch-action: none;            /* ★ 追加: スマホ画面の背景固定・揺れ防止 */
-  overscroll-behavior: contain;  /* ★ 追加: はみ出しスクロールの伝播を阻止 */
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .modal-overlay {
@@ -979,7 +999,6 @@ a { color: inherit; text-decoration: none; }
   max-height: 90vh;
 }
 
-/* 閉じるボタン */
 .modal-close-btn {
   position: absolute;
   top: -44px;
@@ -994,45 +1013,165 @@ a { color: inherit; text-decoration: none; }
   z-index: 30;
 }
 
+.modal-close-btn:hover {
+  transform: none;
+}
+
 .modal-img-box {
   position: relative;
   width: 88vw;
-  max-width: 440px;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  max-height: 60vh;
   background: #ffffff;
   border: 1px solid var(--c-purple);
   border-radius: 12px;
-  padding: 16px 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-box-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* グッズ拡大時 */
+.modal-img-box.is-goods {
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  padding: 24px 44px;
+  justify-content: center;
+}
+
+.modal-img-box.is-goods .modal-main-img-wrap {
+  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
 }
 
-/* 白い四角の中の画像 */
-.modal-img {
+.modal-img-box.is-goods .modal-img {
   max-width: 100%;
   max-height: 100%;
+  transform: scale(1.35);
   object-fit: contain;
-  border: none;
+}
+
+.modal-img-box.is-goods .modal-box-inner {
+  gap: 16px;
+  height: 100%;
+}
+
+/* フード拡大時 */
+.modal-img-box.is-food {
+  max-width: 440px;
+  max-height: 86vh;
+  padding: 26px 40px;
+}
+
+.modal-img-box.is-food .modal-box-inner {
+  gap: 30px;
+}
+
+.modal-img-box.is-food .modal-main-img-wrap {
+  width: 100%;
+  max-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-img-box.is-food .modal-img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+.modal-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.modal-novelty-block {
+  width: 100%;
+  padding: 12px 14px;
   background: transparent;
+  border: 1px solid var(--c-purple); 
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-novelty-tag {
+  display: inline-block;
+  font-family: var(--font-fashion);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--c-purple);
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+.modal-novelty-body-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.modal-novelty-large-img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  background: transparent;
+  border: none;
   padding: 0;
-  box-shadow: none;
-  position: relative;
-  z-index: 1;
+  flex-shrink: 0;
 }
 
-/* グッズ画像 */
-.modal-img.is-goods {
-  transform: scale(1.45);
+.modal-novelty-text {
+  font-family: var(--font-fashion);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  line-height: 1.5;
+  text-align: left;
+  flex: 1;
 }
 
-/* フード画像 */
-.modal-img.is-food {
-  transform: scale(0.92);
+/* 商品名 & 価格ブロック */
+.modal-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.modal-item-title {
+  font-family: var(--font-fashion);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  letter-spacing: 0.04em;
+}
+
+.modal-item-price {
+  font-family: var(--font-fashion);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #8c5383;
 }
 
 /* 矢印ボタン */
@@ -1041,7 +1180,7 @@ a { color: inherit; text-decoration: none; }
   top: 50%;
   transform: translateY(-50%) !important;
   z-index: 20;
-  width: 40px;
+  width: 36px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -1050,70 +1189,36 @@ a { color: inherit; text-decoration: none; }
   border: none !important;
   color: var(--c-purple) !important;
   font-family: sans-serif;
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 300;
-  line-height: 1;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
 }
 
-.modal-nav-btn:hover,
-.modal-nav-btn:focus,
-.modal-nav-btn:active {
-  color: var(--c-purple) !important;
-  transform: translateY(-50%) !important;
-  opacity: 1 !important;
-  background: transparent !important;
-}
-
-.modal-nav-btn.prev {
-  left: 6px;
-}
-
-.modal-nav-btn.next {
-  right: 6px;
-}
-
-.modal-caption {
-  margin-top: 14px;
-  color: #ffffff;
-  font-family: var(--font-fashion);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.modal-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-.modal-price {
-  font-size: 1rem;
-  color: var(--c-lavender);
-  font-weight: 700;
-}
+.modal-nav-btn.prev { left: 4px; }
+.modal-nav-btn.next { right: 4px; }
 
 /* スマホ用レスポンシブ */
 @media (max-width: 600px) {
-  .modal-img-box {
+  .modal-img-box.is-goods {
     width: 86vw;
-    max-width: 350px;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    max-height: 55vh;
-    padding: 12px 42px;
+    max-width: 340px;
+    padding: 20px 36px;
   }
 
-  .modal-img.is-goods {
-    transform: scale(1.45);
+  .modal-img-box.is-food {
+    width: 86vw;
+    max-width: 340px;
+    padding: 20px 32px;
+    max-height: 84vh;
   }
 
-  /* ★ スマホ表示でのフード画像 */
-  .modal-img.is-food {
-    transform: scale(0.92);
+  .modal-novelty-large-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .modal-novelty-text {
+    font-size: 0.8rem;
   }
 
   .modal-nav-btn {

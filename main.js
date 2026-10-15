@@ -134,24 +134,27 @@ function buildGoodsAndFood() {
     });
   }
 
-  // FOOD の描画
-  const foodGrid = $("food-grid");
-  if (foodGrid && typeof FOOD_DATA !== "undefined") {
-    foodGrid.innerHTML = "";
-    FOOD_DATA.forEach((f, idx) => {
-      const item = document.createElement("div");
-      item.className = "food-card";
-      item.innerHTML = `
+// FOOD の描画
+const foodGrid = $("food-grid");
+if (foodGrid && typeof FOOD_DATA !== "undefined") {
+  foodGrid.innerHTML = "";
+  FOOD_DATA.forEach((f, idx) => {
+    const item = document.createElement("div");
+    item.className = "food-card";
+    item.innerHTML = `
+      <div class="food-thumb-wrap">
+        <span class="food-badge-novelty">ノベルティあり</span>
         <img src="${f.image}" alt="${f.name}" class="food-thumb" onclick="openImageModal('food', ${idx})" onerror="this.src='images/icon.webp'">
-        <div class="food-info">
-          <h3 class="food-title">${f.name}</h3>
-          ${f.price ? `<span class="food-price">${f.price}</span>` : ''}
-          ${f.desc ? `<p class="food-desc">${f.desc}</p>` : ''}
-        </div>
-      `;
-      foodGrid.appendChild(item);
-    });
-  }
+      </div>
+      <div class="food-info">
+        <h3 class="food-title">${f.name}</h3>
+        ${f.price ? `<span class="food-price">${f.price}</span>` : ''}
+        ${f.desc ? `<p class="food-desc">${f.desc}</p>` : ''}
+      </div>
+    `;
+    foodGrid.appendChild(item);
+  });
+}
 }
 buildGoodsAndFood();
 
@@ -190,26 +193,50 @@ function updateModalContent() {
   if (!item) return;
 
   const modalImg = $("modal-img");
-  const modalCaption = $("modal-caption");
+  const modalDetails = $("modal-details");
+  const modalBox = document.querySelector(".modal-img-box");
+
+  /* ★ モーダル枠自体にカテゴリクラスを付与（グッズとフードで枠の形状を変えるため） */
+  if (modalBox) {
+    if (currentModalCategory === "food") {
+      modalBox.classList.add("is-food");
+      modalBox.classList.remove("is-goods");
+    } else {
+      modalBox.classList.remove("is-food");
+      modalBox.classList.add("is-goods");
+    }
+  }
 
   if (modalImg) {
     modalImg.src = item.image;
     modalImg.alt = item.name;
-
-    if (currentModalCategory === "food") {
-      modalImg.classList.add("is-food");
-      modalImg.classList.remove("is-goods");
-    } else {
-      modalImg.classList.remove("is-food");
-      modalImg.classList.add("is-goods");
-    }
   }
 
-  if (modalCaption) {
-    modalCaption.innerHTML = `
-      <span class="modal-title">【${item.name}】</span>
-      ${item.price ? `<span class="modal-price">${item.price}</span>` : ''}
+  if (modalDetails) {
+    let detailsHTML = "";
+
+    // 2. ノベルティ特典の情報（フードの場合のみ：左画像・右文章構造）
+    if (currentModalCategory === "food" && item.noveltyImg) {
+      detailsHTML += `
+        <div class="modal-novelty-block">
+          <span class="modal-novelty-tag">ノベルティ特典</span>
+          <div class="modal-novelty-body-row">
+            <img src="${item.noveltyImg}" alt="ノベルティ特典" class="modal-novelty-large-img" onerror="this.style.display='none'">
+            <p class="modal-novelty-text">${item.noveltyDesc || ''}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. 商品名 & 4. 価格
+    detailsHTML += `
+      <div class="modal-item-info">
+        <h3 class="modal-item-title">【${item.name}】</h3>
+        ${item.price ? `<span class="modal-item-price">${item.price}</span>` : ''}
+      </div>
     `;
+
+    modalDetails.innerHTML = detailsHTML;
   }
 }
 

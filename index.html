@@ -36,7 +36,7 @@
     <span class="logo-fallback" style="display:none;">TITLE</span>
   </a>
   
-  <!-- ★ PC用 展開固定ナビゲーション -->
+  <!-- PC用 展開固定ナビゲーション -->
   <nav class="header-nav">
     <ul class="header-nav-list">
       <li><a href="#top" class="header-nav-link">TOP</a></li>
@@ -160,16 +160,16 @@
       <button class="nav-arrow next" id="next-btn" aria-label="次のキャラクター">›</button>
     </div>
 
-<!-- キャラ紹介（フルネーム＋説明文） -->
-<div class="chara-info" id="chara-info"></div>
+    <!-- キャラ紹介（フルネーム＋説明文） -->
+    <div class="chara-info" id="chara-info"></div>
 
-<!-- ④ 白色カーブくびれダイヤ4つ区切り -->
-<div class="diamond-divider">
-  <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
-  <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
-  <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
-  <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
-</div>
+    <!-- 白色カーブくびれダイヤ4つ区切り -->
+    <div class="diamond-divider">
+      <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C16 12 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
+      <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
+      <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
+      <svg class="curved-diamond" viewBox="0 0 24 24"><path d="M12 2 C12 8 8 12 2 12 C8 12 12 16 12 22 C12 16 16 12 22 12 C16 12 12 8 12 2 Z"/></svg>
+    </div>
 
     <section class="others-sec">
       <h3 class="section-title" style="margin-top:0;">CHARACTER</h3>
@@ -188,21 +188,28 @@
   </div>
 </footer>
 
-<!-- ★ 修正: 画像拡大モーダル -->
+<!-- 画像拡大モーダル -->
 <div class="image-modal" id="image-modal" hidden aria-hidden="true">
   <div class="modal-overlay" id="modal-overlay"></div>
   <div class="modal-content">
     <button class="modal-close-btn" id="modal-close-btn" aria-label="閉じる">✕</button>
 
-    <!-- ★ 白い四角（画像と左右矢印を包む枠） -->
+    <!-- 白い四角（画像・ノベルティ・商品名・価格をすべて収める枠） -->
     <div class="modal-img-box">
       <button class="modal-nav-btn prev" id="modal-prev-btn" aria-label="前の画像">‹</button>
-      <img src="" alt="" id="modal-img" class="modal-img">
+      
+      <div class="modal-box-inner">
+        <!-- 1. メイン画像 -->
+        <div class="modal-main-img-wrap">
+          <img src="" alt="" id="modal-img" class="modal-img">
+        </div>
+
+        <!-- 2. ノベルティ情報 / 3. 商品名 / 4. 価格（JSで挿入） -->
+        <div class="modal-details" id="modal-details"></div>
+      </div>
+
       <button class="modal-nav-btn next" id="modal-next-btn" aria-label="次の画像">›</button>
     </div>
-
-    <!-- キャプション（商品名・価格） -->
-    <div class="modal-caption" id="modal-caption"></div>
   </div>
 </div>
 
